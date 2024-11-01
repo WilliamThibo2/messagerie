@@ -10,9 +10,11 @@ const sendButton = document.getElementById("sendButton");
 function sendMessage() {
     const message = messageInput.value;
     if (message) {
-        // Émettre le message au serveur
+        console.log("Envoi du message :", message); // Log de débogage
         socket.emit("chat message", message);
         messageInput.value = ""; // Effacer l'entrée
+    } else {
+        console.log("Aucun message à envoyer."); // Log de débogage
     }
 }
 
@@ -21,6 +23,7 @@ sendButton.addEventListener("click", sendMessage);
 
 // Écouter les messages du serveur
 socket.on("chat message", function(msg) {
+    console.log("Message reçu :", msg); // Log de débogage
     const item = document.createElement("div");
     item.textContent = msg;
     messageContainer.appendChild(item);
@@ -29,5 +32,8 @@ socket.on("chat message", function(msg) {
 
 // Gérer les erreurs de connexion
 socket.on("connect_error", (error) => {
+    console.error("Erreur de connexion :", error);
+});
+", (error) => {
     console.error("Erreur de connexion :", error);
 });
