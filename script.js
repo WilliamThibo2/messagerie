@@ -1,9 +1,10 @@
 // Connexion au serveur Socket.IO
-const socket = io("https://server-7v9z.onrender.com"); // Utilisez simplement l'URL sans le port
+const socket = io("https://server-7v9z.onrender.com");
 
 // Éléments du DOM
 const messageContainer = document.getElementById("messageContainer");
 const messageInput = document.getElementById("messageInput");
+const sendButton = document.getElementById("sendButton");
 
 // Fonction pour envoyer un message
 function sendMessage() {
@@ -14,6 +15,9 @@ function sendMessage() {
         messageInput.value = ""; // Effacer l'entrée
     }
 }
+
+// Écouter le clic sur le bouton "Envoyer"
+sendButton.addEventListener("click", sendMessage);
 
 // Écouter les messages du serveur
 socket.on("chat message", function(msg) {
